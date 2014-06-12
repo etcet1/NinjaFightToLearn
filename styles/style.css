@@ -1,0 +1,21 @@
+﻿button {
+    background: #ccff00; /* Old browsers */
+    background: -moz-linear-gradient(top, #ccff00 50%, #ccff00 50%, #96c400 50%, #96c400 50%, #ccff00 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#ccff00), color-stop(50%,#ccff00), color-stop(50%,#96c400), color-stop(50%,#96c400), color-stop(100%,#ccff00)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #ccff00 50%,#ccff00 50%,#96c400 50%,#96c400 50%,#ccff00 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #ccff00 50%,#ccff00 50%,#96c400 50%,#96c400 50%,#ccff00 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #ccff00 50%,#ccff00 50%,#96c400 50%,#96c400 50%,#ccff00 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #ccff00 50%,#ccff00 50%,#96c400 50%,#96c400 50%,#ccff00 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ccff00', endColorstr='#ccff00',GradientType=0 ); /* IE6-9 */
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 100px;
+    height: 40px;
+    font-weight: bold;
+    font-size: 17px;
+    box-shadow: 3px 3px 5px #888888;
+}
+
+button:hover {
+    background: #ccff00;
+}

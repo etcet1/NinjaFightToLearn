@@ -25,10 +25,8 @@ function Game() {
      */
     this.init = function () {
 
-        setTimeout(function () {
-                drawStartScreen(Raphael(0, 0, 800, 600));
-            },
-            1500);
+        drawStartScreen(Raphael(0, 0, 800, 600));
+            
 
         $(document).on('click', '#startButton', function () {
             clearStartScreen();

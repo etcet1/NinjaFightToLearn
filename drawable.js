@@ -112,8 +112,8 @@ var imageRepository = new function () {
 function drawStartScreen(paper) {
     var paperWidth = paper.width,
         paperHeight = paper.height,
-        ninjaWidth = 220,
-        ninjaHeight = 230,
+        ninjaWidth = 133,
+        ninjaHeight = 170,
         ninjaPosX = (paperWidth / 2) - (ninjaWidth / 2),
         ninjaPosY = (paperHeight / 2) - (ninjaHeight / 2),
         ninja = paper.image("images/ninja.png", ninjaPosX, ninjaPosY, ninjaWidth, ninjaHeight),
@@ -139,6 +139,27 @@ function drawStartScreen(paper) {
     }, 1000);
 
     eggDown.node.id = "startButton";
+
+    function addMenuButtons() {
+        var startButton = document.createElement('button');
+        startButton.innerHTML = "Start";
+        startButton.style.position = "absolute";
+        startButton.style.top = "250px";
+        startButton.id = "start";
+        startButton.style.left = "230px";
+        // startButton.onclick = startGame; // change the function
+        document.body.appendChild(startButton);
+
+        var aboutButton = document.createElement('button');
+        aboutButton.innerHTML = "About";
+        aboutButton.style.position = "absolute";
+        aboutButton.style.top = "250px";
+        aboutButton.style.left = "460px";
+        // aboutButton.onclick = aboutGame; // change the function
+        document.body.appendChild(aboutButton);
+    }
+
+    setTimeout(addMenuButtons, 1200);
 }
 
 function clearStartScreen() {
