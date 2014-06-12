@@ -32,6 +32,11 @@ function Game() {
             clearStartScreen();
         });
 
+        $(document).on('click', '#aboutButton', function () {
+            clearStartScreen();
+            drawAboutScreen(Raphael(0, 0, 800, 600));
+        });
+
 //        Get the canvas element
         this.bgCanvas = document.getElementById('background');
         // Test to see if canvas is supported

@@ -152,12 +152,30 @@ function drawStartScreen(paper) {
         aboutButton.innerHTML = "About";
         aboutButton.style.position = "absolute";
         aboutButton.style.top = "250px";
+        aboutButton.id = "aboutButton";
         aboutButton.style.left = "460px";
         // aboutButton.onclick = aboutGame; // change the function
         document.body.appendChild(aboutButton);
     }
 
     setTimeout(addMenuButtons, 1200);
+}
+
+function drawAboutScreen(paper) {
+    var paperWidth = paper.width,
+        paperHeight = paper.height,
+        aboutTextPosX = (paperWidth / 2),
+        aboutTextPosY = (paperHeight / 3),
+        text = "Some stupid about text";
+
+    var aboutText = paper.text(aboutTextPosX, aboutTextPosY, text);
+
+    aboutText.attr({
+        "font-weight": "bold",
+        "font-size": 16,
+        "font-family": "Calibri, Arial",
+        fill: "black"
+    });
 }
 
 function clearStartScreen() {
