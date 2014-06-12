@@ -138,14 +138,12 @@ function drawStartScreen(paper) {
         y: eggHeight * 2
     }, 1000);
 
-    eggDown.node.id = "startButton";
-
     function addMenuButtons() {
         var startButton = document.createElement('button');
         startButton.innerHTML = "Start";
         startButton.style.position = "absolute";
         startButton.style.top = "250px";
-        startButton.id = "start";
+        startButton.id = "startButton";
         startButton.style.left = "230px";
         // startButton.onclick = startGame; // change the function
         document.body.appendChild(startButton);
@@ -164,5 +162,10 @@ function drawStartScreen(paper) {
 
 function clearStartScreen() {
     var paper = document.getElementsByTagName('svg')[0];
+    var buttons = document.getElementsByTagName('button');
+    for(var i = 0; i < buttons.length; i++){
+        buttons[i].remove();
+        i--;
+    }
     paper.remove();
 }
