@@ -45,11 +45,7 @@ function Game() {
 
             this.homeworks = [];
             this.stars = [];
-            // var testStar = new Star(100,100,20,20);
-            // testStar.speedX = 5;
-            // testStar.speedY = 5;
-            // this.stars.push( testStar );
-
+            
             return true;
         } else {
             return false;
@@ -62,7 +58,7 @@ function Game() {
         console.log(this);
         this.updateFrame();
         this.drawFrame();
-        this.spawnHomework();
+        // this.spawnHomework();
     }
     
     this.updateFrame = function () {
@@ -77,28 +73,28 @@ function Game() {
 
         if (!self.ninja.isAlive) {
             // TODO: Show defeat screen
-            self.context.clearRect(0, 0, self.canvas.width, self.canvas.height);
+            // self.context.clearRect(0, 0, self.canvas.width, self.canvas.height);
             drawGameOverScreen(Raphael(0, 0, 800, 600));
             console.log("lost");
             return;
         }
-        else {
-            if ( this.currentFrame % 3 === 0 ){
-                setTimeout(self.updateFrame, 16);
-            }
-            else {
-                setTimeout(self.updateFrame, 17);
-            }
+        
+        if ( self.currentFrame % 3 === 0 ){
+            setTimeout(self.updateFrame, 16);
         }
+        else {
+            setTimeout(self.updateFrame, 17);
+        }
+        ++self.currentFrame;
     }
 
-    this.spawnHomework = function () {
-        var homeworkY = Math.floor((Math.random() * 500) + 1),
-            homework = new Homework(800, homeworkY, 80, 100, -5, 0);
+    // this.spawnHomework = function () {
+        // var homeworkY = Math.floor((Math.random() * 500) + 1),
+            // homework = new Homework(800, homeworkY, 80, 100, -5, 0);
 
-        self.homeworks.push(homework);
-        setTimeout(self.spawnHomework, 1000);
-    }
+        // self.homeworks.push(homework);
+        // setTimeout(self.spawnHomework, 1000);
+    // }
     
     this.moveObjects = function (){
         // console.log(this.homeworks);
@@ -127,7 +123,33 @@ function Game() {
     
     this.addNewObjects = function(){
         // TODO: add a star if player is currently shooting one
-        // TODO: add a homework if it is time for it
+        
+        // Add a homework if it's time
+        if ( this.currentFrame % 60 === 0 ){
+            var spawnPoint = {
+                    x: this.canvas.width ,
+                    y: Math.floor((Math.random() * 
+                        (this.canvas.height - imageRepository.homeWork.height)) + 1)
+                },
+                targetPoint = {
+                    x: 0,
+                    y: Math.floor((Math.random() * 
+                        (this.canvas.height - imageRepository.homeWork.height)) + 1)
+                },
+                direction = getVectorWithLength(5, spawnPoint, targetPoint);
+            
+            var newHomework = new Homework(
+                spawnPoint.x,
+                spawnPoint.y,
+                imageRepository.homeWork.width,
+                imageRepository.homeWork.height,
+                direction.x,
+                direction.y);
+                
+            console.log(newHomework);
+                
+            self.homeworks.push(newHomework);
+        }
     }
     
     this.detectCollision = function(){
@@ -148,8 +170,6 @@ function Game() {
     
     this.removeDeadObjects = function(){
         // Remove dead homeworks
-        // console.log(this,self);
-        // console.log(this.homeworks.length);
         for ( var i = 0, len = this.homeworks.length;i < len;++i ){
             // console.log(i, len);
             if ( !this.homeworks[i].isAlive ) {
@@ -179,8 +199,6 @@ function Game() {
         self.background.draw(self.context);
         self.ninja.draw(self.context);
         
-        // console.log(self);
-        
         for ( var i = 0, len = self.homeworks.length;i < len;++i ){
             self.homeworks[i].draw(self.context);
         }
@@ -192,7 +210,6 @@ function Game() {
         requestAnimationFrame(self.drawFrame);
     }
 
-// Start the animation loop this.start = function() { animate(); }; } 
 }
 
 function isColliding(firstObject, secondObject){
@@ -206,18 +223,21 @@ function isColliding(firstObject, secondObject){
     return false;
 }
 
-/**
- * The animation loop. Calls the requestAnimationFrame shim to
- * optimize the game loop and draws all game objects. This
- * function must be a gobal function and cannot be within an
- * object.
- */
-// function animate() {
-    // requestAnimFrame(animate);
-    // game.background.draw();
-// }
+function getVectorWithLength(length, fromPoint, toPoint) {
+    var unitVector = {},
+        deltaX = toPoint.x - fromPoint.x,
+        deltaY = toPoint.y - fromPoint.y,
+        originalLength = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    
+    unitVector.x = deltaX / originalLength;
+    unitVector.y = deltaY / originalLength;
+    
+    return {
+        x: unitVector.x * length,
+        y: unitVector.y * length
+    };
+}
 
-/** * requestAnim shim layer by Paul Irish * Finds the first API that works to optimize the animation loop, * otherwise defaults to setTimeout(). */ 
 window.requestAnimationFrame = (function () {
     return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (/* function */ callback, /* DOMElement */ element) {
         window.setTimeout(callback, 1000 / 60);
