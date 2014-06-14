@@ -27,16 +27,6 @@ function Game() {
         console.log("game init");
 
         drawStartScreen(Raphael(0, 0, 800, 600));
-
-        $(document).on('click', '#startButton', function () {
-            clearStartScreen();
-            self.start();
-        });
-
-        $(document).on('click', '#aboutButton', function () {
-            clearStartScreen();
-            drawAboutScreen(Raphael(0, 0, 800, 600));
-        });
         
         this.canvas = document.getElementById('game-canvas');
         
