@@ -1,85 +1,89 @@
-var controls = new function () {
+window.onload = function() {
+    var controls = new function () {
 
-    // Define currently pressed key controls
+        // Define currently pressed key controls
 
-    //asigning variable to the instance of the object
-    var self = this;
-
-    //pressed keys array
-    self.pressedKeys = {};
-
-    //mouse events
-    self.cursorX = 0;
-    self.cursorY = 0;
-    self.leftButtonClick = false;
+        //asigning variable to the instance of the object
+        var self = this;
+        var gameField = document.getElementById('game-canvas');
 
 
-    self.keyPress = function (e) {
+        //pressed keys array
+        self.pressedKeys = {};
 
-        var key;
+        //mouse events
+        self.cursorX = 0;
+        self.cursorY = 0;
+        self.leftButtonClick = false;
 
-        //IE
-        if (window.event) {
-            key = e.keyCode;
-        } else {
-            key = e.which;
-        }
+        self.keyPress = function (e) {
 
-        //directions
-        if (key === 37 || key === 38 || key === 39 || key === 40) {
-            self.pressedKeys[key] = true;
-        }
+            var key;
 
-        //console.log(self.pressedKeys);
-    };
+            //IE
+            if (window.event) {
+                key = e.keyCode;
+            } else {
+                key = e.which;
+            }
 
-    self.mouseClick = function (e) {
-        var buttonClicked;
+            //directions
+            if (key === 37 || key === 38 || key === 39 || key === 40) {
+                self.pressedKeys[key] = true;
+            }
 
-        //IE
-        if (window.event) {
-            buttonClicked = e.button;
-        } else {
-            buttonClicked = e.which;
-        }
+            //console.log(self.pressedKeys);
+        };
 
-        if (buttonClicked == 1) {
-            self.leftButtonClick = true;
-            self.cursorX = e.pageX;
-            self.cursorY = e.pageY;
-        }
+        self.mouseClick = function (e) {
+            var buttonClicked;
+            var buttonCode;
 
-       // console.log(self.cursorX);
-       // console.log(self.cursorY);
-       // console.log(self.leftButtonClick);
-    };
+            if (window.event) {
+                buttonClicked = e.button;
+                buttonCode = 0;
+            } else {
+                buttonClicked = e.which;
+                buttonCode = 1;
+            }
 
-    self.keyPressEnd = function (e) {
+            if (buttonClicked === buttonCode) {
+                self.leftButtonClick = true;
+                self.cursorX = e.pageX;
+                self.cursorY = e.pageY;
+            }
 
-        var key;
+            // console.log(self.cursorX);
+            // console.log(self.cursorY);
+           // console.log(self.leftButtonClick);
+        };
 
-        //IE
-        if (window.event) {
-            key = e.keyCode;
-        } else {
-            key = e.which;
-        }
+        self.keyPressEnd = function (e) {
 
-        //directions
-        if (key === 37 || key === 38 || key === 39 || key === 40) {
-            self.pressedKeys[key] = false;
-        }
-    };
+            var key;
 
-//    self.mouseClickEnd = function () {
-//        self.leftButtonClick = false;
-//       // console.log(self.leftButtonClick);
-//    };
+            //IE
+            if (window.event) {
+                key = e.keyCode;
+            } else {
+                key = e.which;
+            }
 
-    document.addEventListener('keydown', self.keyPress);
-    document.addEventListener('onmousedown', self.mouseClick, false);
+            //directions
+            if (key === 37 || key === 38 || key === 39 || key === 40) {
+                self.pressedKeys[key] = false;
+            }
+        };
 
-    document.addEventListener('keyup', self.keyPressEnd);
-//    document.addEventListener('mouseup', self.mouseClickEnd, false);
-}
+        self.mouseClickEnd = function () {
+            self.leftButtonClick = false;
+            //console.log(self.leftButtonClick);
+        };
 
+        gameField.addEventListener('keydown', self.keyPress, false);
+        gameField.addEventListener('mousedown', self.mouseClick, false);
+
+        gameField.addEventListener('keyup', self.keyPressEnd);
+        gameField.addEventListener('mouseup', self.mouseClickEnd, false);
+    }
+};
