@@ -24,6 +24,7 @@ function Game() {
 	var self = this;
     
     this.init = function () {
+        //TODO: add timers for spawning homeworks
         console.log("game init");
 
         drawStartScreen(Raphael(0, 0, 800, 600));
@@ -86,6 +87,7 @@ function Game() {
     
     this.moveObjects = function (){
         // console.log(this.homeworks);
+        // TODO: dynamically update the ninja after having the controls implemented
         this.ninja.move();
        
         for ( var i = 0, len = this.homeworks.length;i < len;++i ){
