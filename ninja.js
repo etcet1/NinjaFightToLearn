@@ -3,6 +3,7 @@ function Ninja(x, y, width, height, images) {
     this.y = y;
     this.width = width;
     this.height = height;
+    this.images = images;
     
     this.speedX = 0;
     this.speedY = 0;
@@ -15,15 +16,15 @@ function Ninja(x, y, width, height, images) {
     this.numberOfSprites = images.length;
 
     this.draw = function (context) {
-        // Pan background
-        this.y += this.speed;
-        this.context.drawImage(imageRepository.ninja, this.x, this.y);
-        // Draw another image at the top edge of the first image
-        this.context.drawImage(imageRepository.ninja, this.x, this.y - this.canvasHeight);
+        context.drawImage(images[currentSprite], this.x, this.y, this.width, this.height);
     }
     
     this.collideWith = function (otherObject) {
-        
+        if (otherObject.type === "homework"){
+            if (isColliding(this, otherObject)){
+                this.isAlive = false;
+            }
+        }
     }
 
     this.move = function (leftBorderX, topBorderY, rightBorderX, bottomBorderY) {
