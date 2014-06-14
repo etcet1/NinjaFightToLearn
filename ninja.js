@@ -28,6 +28,11 @@ function Ninja(x, y, width, height, images) {
     }
 
     this.move = function (leftBorderX, topBorderY, rightBorderX, bottomBorderY) {
+        // Check if the ninja is moving
+        if (this.speedX === 0 && this.speedY === 0){
+            return;
+        }
+        
         // Move the ninja within the given bounds
         var newPosition = {
             x: this.x + this.speedX,
@@ -47,11 +52,7 @@ function Ninja(x, y, width, height, images) {
             newPosition.y = bottomBorderY - this.height;
         }
         
-        // Check if the ninja is moving
-        if (this.speedX === 0 && this.speedY === 0){
-            return;
-        }
-        // If not, update the ninja sprite
+        // Update the ninja sprite
         this.currentFrame++;
         if (this.currentFrame === this.framesPerSprite){
             ++this.currentSprite;
