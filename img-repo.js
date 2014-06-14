@@ -1,4 +1,4 @@
-window.onload = function() {
+window.addEventListener("load", function() {
     window.imageRepository = new function () {
         // Define images
         this.background = new Image();
@@ -55,4 +55,4 @@ window.onload = function() {
             console.log("star loaded");
         }
     }
-}
+}, false);

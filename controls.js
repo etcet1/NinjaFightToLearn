@@ -1,4 +1,4 @@
-window.onload = function() {
+window.addEventListener("load", function() {
     var controls = new function () {
 
         // Define currently pressed key controls
@@ -86,4 +86,4 @@ window.onload = function() {
         gameField.addEventListener('keyup', self.keyPressEnd);
         gameField.addEventListener('mouseup', self.mouseClickEnd, false);
     }
-};
+}, false);
