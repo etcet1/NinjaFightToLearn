@@ -79,6 +79,20 @@ function drawHelpScreen(paper) {
     });
 }
 
+function drawGameOverScreen(paper) {
+
+    drawText(paper, 400, 250, "Game over. You lost!", 30, "yellow");
+
+    drawScreenButton("Play again", "absolute", 300, 370, "playAgainButton");
+
+    $(document).on('click', '#playAgainButton', function () {
+        clearStartScreen();
+        
+        game = new Game();
+        game.init();
+    });
+}
+
 function clearStartScreen() {
     var paper = document.getElementsByTagName('svg')[0];
     var buttons = document.getElementsByTagName('button');

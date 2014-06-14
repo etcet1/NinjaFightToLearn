@@ -63,7 +63,7 @@ function Game() {
         this.spawnHomework();
     }
     
-    this.updateFrame = function(){
+    this.updateFrame = function () {
         // console.log("update");
         // console.log(self.ninja);
         // console.log(self);
@@ -72,14 +72,17 @@ function Game() {
         self.addNewObjects();
         self.detectCollision();
         self.removeDeadObjects();
-        
-        if (!self.ninja.isAlive){
+
+        if (!self.ninja.isAlive) {
             // TODO: Show defeat screen
+            self.context.clearRect(0, 0, self.canvas.width, self.canvas.height);
+            drawGameOverScreen(Raphael(0, 0, 800, 600));
             console.log("lost");
             return;
         }
-        
-        setTimeout(self.updateFrame, 1000 / 60);
+        else {
+            setTimeout(self.updateFrame, 1000 / 60);
+        }
     }
 
     this.spawnHomework = function () {
@@ -176,7 +179,7 @@ function Game() {
         
         requestAnimationFrame(self.drawFrame);
     }
-    
+
 // Start the animation loop this.start = function() { animate(); }; } 
 }
 
