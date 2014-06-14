@@ -52,15 +52,14 @@ function Game() {
                 imageRepository.ninja);
 
             this.homeworks = [];
-            var testHomework = new Homework(150,150,100,100);
-            testHomework.speedX = 3;
+            var testHomework = new Homework(500,300,100,100,-5,0);
             this.homeworks.push (testHomework);
             
             this.stars = [];
-            var testStar = new Star(100,100,20,20);
-            testStar.speedX = 5;
-            testStar.speedY = 5;
-            this.stars.push( testStar );
+            // var testStar = new Star(100,100,20,20);
+            // testStar.speedX = 5;
+            // testStar.speedY = 5;
+            // this.stars.push( testStar );
 
             return true;
         } else {
@@ -88,6 +87,7 @@ function Game() {
         
         if (!self.ninja.isAlive){
             // TODO: Show defeat screen
+            console.log("lost");
             return;
         }
         
@@ -133,6 +133,10 @@ function Game() {
         }
         
         // Detect collisions between ninja and homeworks
+        for ( var i = 0, homeworksLen = this.homeworks.length;i < homeworksLen;++i ){
+            this.homeworks[i].collideWith(this.ninja);
+            this.ninja.collideWith(this.homeworks[i]);
+        }
     }
     
     this.removeDeadObjects = function(){
@@ -177,6 +181,17 @@ function Game() {
     }
     
 // Start the animation loop this.start = function() { animate(); }; } 
+}
+
+function isColliding(firstObject, secondObject){
+    if ( firstObject.x < secondObject.x + secondObject.width &&
+            firstObject.x + firstObject.width > secondObject.x &&
+            firstObject.y < secondObject.y + secondObject.height &&
+            firstObject.y + firstObject.height > secondObject.y ){
+        return true;
+    }
+    
+    return false;
 }
 
 /**
