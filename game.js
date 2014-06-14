@@ -27,20 +27,12 @@ function Game() {
         console.log("game init");
 
         drawStartScreen(Raphael(0, 0, 800, 600));
-
-        $(document).on('click', '#startButton', function () {
-            clearStartScreen();
-            self.start();
-        });
-
-        $(document).on('click', '#aboutButton', function () {
-            clearStartScreen();
-            drawAboutScreen(Raphael(0, 0, 800, 600));
-        });
         
         this.canvas = document.getElementById('game-canvas');
         
         if (this.canvas.getContext) {
+            this.currentFrame = 0;
+        
             this.context = this.canvas.getContext('2d');
             this.background = new Background(imageRepository.background);
             
@@ -52,15 +44,11 @@ function Game() {
                 imageRepository.ninja);
 
             this.homeworks = [];
-            var testHomework = new Homework(150,150,100,100);
-            testHomework.speedX = 3;
-            this.homeworks.push (testHomework);
-            
             this.stars = [];
-            var testStar = new Star(100,100,20,20);
-            testStar.speedX = 5;
-            testStar.speedY = 5;
-            this.stars.push( testStar );
+            // var testStar = new Star(100,100,20,20);
+            // testStar.speedX = 5;
+            // testStar.speedY = 5;
+            // this.stars.push( testStar );
 
             return true;
         } else {
@@ -74,9 +62,10 @@ function Game() {
         console.log(this);
         this.updateFrame();
         this.drawFrame();
+        this.spawnHomework();
     }
     
-    this.updateFrame = function(){
+    this.updateFrame = function () {
         // console.log("update");
         // console.log(self.ninja);
         // console.log(self);
@@ -85,17 +74,35 @@ function Game() {
         self.addNewObjects();
         self.detectCollision();
         self.removeDeadObjects();
-        
-        if (!self.ninja.isAlive){
+
+        if (!self.ninja.isAlive) {
             // TODO: Show defeat screen
+            self.context.clearRect(0, 0, self.canvas.width, self.canvas.height);
+            drawGameOverScreen(Raphael(0, 0, 800, 600));
+            console.log("lost");
             return;
         }
-        
-        setTimeout(self.updateFrame, 1000 / 60);
+        else {
+            if ( this.currentFrame % 3 === 0 ){
+                setTimeout(self.updateFrame, 16);
+            }
+            else {
+                setTimeout(self.updateFrame, 17);
+            }
+        }
+    }
+
+    this.spawnHomework = function () {
+        var homeworkY = Math.floor((Math.random() * 500) + 1),
+            homework = new Homework(800, homeworkY, 80, 100, -5, 0);
+
+        self.homeworks.push(homework);
+        setTimeout(self.spawnHomework, 1000);
     }
     
     this.moveObjects = function (){
         // console.log(this.homeworks);
+        // TODO: dynamically update the ninja after having the controls implemented
         this.ninja.move();
        
         for ( var i = 0, len = this.homeworks.length;i < len;++i ){
@@ -133,6 +140,10 @@ function Game() {
         }
         
         // Detect collisions between ninja and homeworks
+        for ( var i = 0, homeworksLen = this.homeworks.length;i < homeworksLen;++i ){
+            this.homeworks[i].collideWith(this.ninja);
+            this.ninja.collideWith(this.homeworks[i]);
+        }
     }
     
     this.removeDeadObjects = function(){
@@ -160,6 +171,11 @@ function Game() {
     
     this.drawFrame = function(){
         self.context.clearRect(0, 0, self.canvas.width, self.canvas.height);
+        
+        if ( !self.ninja.isAlive ){
+            return;
+        }
+        
         self.background.draw(self.context);
         self.ninja.draw(self.context);
         
@@ -175,8 +191,19 @@ function Game() {
         
         requestAnimationFrame(self.drawFrame);
     }
-    
+
 // Start the animation loop this.start = function() { animate(); }; } 
+}
+
+function isColliding(firstObject, secondObject){
+    if ( firstObject.x < secondObject.x + secondObject.width &&
+            firstObject.x + firstObject.width > secondObject.x &&
+            firstObject.y < secondObject.y + secondObject.height &&
+            firstObject.y + firstObject.height > secondObject.y ){
+        return true;
+    }
+    
+    return false;
 }
 
 /**

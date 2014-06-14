@@ -24,33 +24,54 @@ function drawStartScreen(paper) {
         y: 0
     }, 1000);
     eggDown.animate({
-        y: eggHeight * 2
+        y: paperHeight - eggHeight
     }, 1000);
 
-    setTimeout(function(){
+    setTimeout(function () {
         //draw main screen buttons
-        drawScreenButton("Start", "absolute", 250, 230, "startButton");
-        drawScreenButton("About", "absolute", 250, 460, "aboutButton");
+        drawScreenButton("Start", "absolute", 280, 230, "startButton");
+        drawScreenButton("Help", "absolute", 280, 470, "helpButton");
+
+        $(document).on('click', '#startButton', function () {
+            clearStartScreen();
+            game.start();
+        });
+
+        $(document).on('click', '#helpButton', function () {
+            clearStartScreen();
+            drawHelpScreen(Raphael(0, 0, 800, 600));
+        });
     }, 1200);
 }
 
-function drawAboutScreen(paper) {
+function drawHelpScreen(paper) {
     var paperWidth = paper.width,
-        paperHeight = paper.height,
-        aboutTextPosX = (paperWidth / 2),
-        aboutTextPosY = (paperHeight / 3),
-        text = "Some stupid about text";
+        paperHeight = paper.height;
 
-    var aboutText = paper.text(aboutTextPosX, aboutTextPosY, text);
+    drawText(paper, paperWidth / 2, paperHeight / 8, "Ninja Fight To Learn", 45, "black");
 
-    aboutText.attr({
-        "font-weight": "bold",
-        "font-size": 16,
-        "font-family": "Calibri, Arial",
-        fill: "black"
-    });
+    drawText(paper, 100, 200, "Controls", 35, "black");
+    drawText(paper, 150, 255, "Move left", 30, "black");
+    paper.image("images/left-arrow.svg", 50, 240, 30, 30);
+    drawText(paper, 145, 295, "Move up", 30, "black");
+    paper.image("images/up-arrow.svg", 50, 280, 30, 30);
+    drawText(paper, 160, 335, "Move right", 30, "black");
+    paper.image("images/right-arrow.svg", 50, 320, 30, 30);
+    drawText(paper, 167, 375, "Move down", 30, "black");
+    paper.image("images/down-arrow.svg", 50, 360, 30, 30);
+    drawText(paper, 125, 423, "Shoot", 30, "black");
+    paper.image("images/mouse.svg", 50, 400, 30, 45);
 
-    drawScreenButton("Back", "absolute", 400, 50, "backButton");
+    drawText(paper, 570, 200, "Hints", 35, "black");
+    drawText(paper, 570, 255, "You should avoid collision with homeworks.", 20, "black");
+    paper.image("images/homework.png", 550, 270, 40, 60);
+    drawText(paper, 570, 350, "They are deadly. Don't touch them.", 20, "black");
+    drawText(paper, 570, 380, "You can kill them with stars.", 20, "black");
+    paper.image("images/star.png", 550, 395, 40, 40);
+
+    drawScreenButton("Back", "absolute", 500, 350, "backButton");
+
+    drawText(paper, 400, 580, "Copyright (c) 2014 Telerik Academy Team \"Mavado\"", 15, "black");
 
     $(document).on('click', '#backButton', function () {
         clearStartScreen();
@@ -58,17 +79,31 @@ function drawAboutScreen(paper) {
     });
 }
 
+function drawGameOverScreen(paper) {
+
+    drawText(paper, 400, 250, "Game over. You lost!", 30, "yellow");
+
+    drawScreenButton("Play again", "absolute", 300, 370, "playAgainButton");
+
+    $(document).on('click', '#playAgainButton', function () {
+        clearStartScreen();
+        
+        game = new Game();
+        game.init();
+    });
+}
+
 function clearStartScreen() {
     var paper = document.getElementsByTagName('svg')[0];
     var buttons = document.getElementsByTagName('button');
-    for(var i = 0; i < buttons.length; i++){
+    for (var i = 0; i < buttons.length; i++) {
         buttons[i].remove();
         i--;
     }
     paper.remove();
 }
 
-function drawScreenButton (text, position, top, left, id){
+function drawScreenButton(text, position, top, left, id) {
     var startButton = document.createElement('button');
     startButton.innerHTML = text;
     startButton.style.position = position;
@@ -76,4 +111,18 @@ function drawScreenButton (text, position, top, left, id){
     startButton.style.left = left + "px";
     startButton.id = id;
     document.body.appendChild(startButton);
+}
+
+function drawText(paper, x, y, textToDraw, fontSize, color) {
+    var posX = x,
+        posY = y,
+        text = textToDraw,
+        drawnText = paper.text(posX, posY, text);
+
+    drawnText.attr({
+        "font-weight": "bold",
+        "font-size": fontSize,
+        "font-family": "Arial, Calibri",
+        fill: color
+    });
 }

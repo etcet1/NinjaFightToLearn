@@ -24,10 +24,10 @@ function Star(x, y, width, height, speedX, speedY) {
         this.x += this.speedX,
         this.y += this.speedY
 
-        if (this.x === rightBorderX ||
-                this.x - this.width === leftBorderX ||
-                this.y === bottomBorderY ||
-                this.y - this.height === topBorderY) {
+        if (this.x > rightBorderX ||
+                this.x + this.width < leftBorderX ||
+                this.y > bottomBorderY ||
+                this.y + this.height < topBorderY) {
             this.isAlive = false;
         }
     };
