@@ -37,7 +37,7 @@ function drawStartScreen(paper) {
 
         $(document).on('click', '#startButton', function () {
             clearStartScreen();
-            self.start();
+            game.start();
         });
 
         $(document).on('click', '#aboutButton', function () {
