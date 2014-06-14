@@ -31,6 +31,8 @@ function Game() {
         this.canvas = document.getElementById('game-canvas');
         
         if (this.canvas.getContext) {
+            this.currFrame = 0;
+        
             this.context = this.canvas.getContext('2d');
             this.background = new Background(imageRepository.background);
             
@@ -78,8 +80,16 @@ function Game() {
             console.log("lost");
             return;
         }
+ 
+        ++this.currFrame;
         
-        setTimeout(self.updateFrame, 1000 / 60);
+        if ( this.currFrameInSecond % 3 === 0 ){
+            setTimeout(self.updateFrame, 16);
+        }
+        else {
+            setTimeout(self.updateFrame, 17);
+        }
+        
     }
 
     this.spawnHomework = function () {
