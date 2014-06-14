@@ -164,6 +164,11 @@ function Game() {
     
     this.drawFrame = function(){
         self.context.clearRect(0, 0, self.canvas.width, self.canvas.height);
+        
+        if ( !self.ninja.isAlive ){
+            return;
+        }
+        
         self.background.draw(self.context);
         self.ninja.draw(self.context);
         
