@@ -56,6 +56,23 @@ var controls = new function () {
        // console.log(self.leftButtonClick);
     };
 
+    self.keyPressEnd = function (e) {
+
+        var key;
+
+        //IE
+        if (window.event) {
+            key = e.keyCode;
+        } else {
+            key = e.which;
+        }
+
+        //directions
+        if (key === 37 || key === 38 || key === 39 || key === 40) {
+            self.pressedKeys[key] = false;
+        }
+    };
+
 //    self.mouseClickEnd = function () {
 //        self.leftButtonClick = false;
 //       // console.log(self.leftButtonClick);
@@ -64,6 +81,7 @@ var controls = new function () {
     document.addEventListener('keydown', self.keyPress);
     document.addEventListener('onmousedown', self.mouseClick, false);
 
+    document.addEventListener('keyup', self.keyPressEnd);
 //    document.addEventListener('mouseup', self.mouseClickEnd, false);
 }
 
