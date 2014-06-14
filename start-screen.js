@@ -81,7 +81,7 @@ function drawHelpScreen(paper) {
 
 function drawGameOverScreen(paper) {
 
-    drawText(paper, 400, 250, "Game over. You lost!", 30, "yellow");
+    drawText(paper, 400, 250, "Game over. You lost!", 25, "yellow");
 
     drawScreenButton("Play again", "absolute", 300, 370, "playAgainButton");
 
