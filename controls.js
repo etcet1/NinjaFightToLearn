@@ -55,7 +55,7 @@ window.onload = function() {
 
             // console.log(self.cursorX);
             // console.log(self.cursorY);
-           // console.log(self.leftButtonClick);
+            // console.log(self.leftButtonClick);
         };
 
         self.keyPressEnd = function (e) {
