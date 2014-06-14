@@ -9,7 +9,7 @@ function Star(x, y, width, height, speedX, speedY) {
     this.type = "star";
 
     this.draw = function (context) {
-        this.context.drawImage(imageRepository.Star, this.x, this.y, this.width, this.height);
+        context.drawImage(imageRepository.star, this.x, this.y, this.width, this.height);
     }
 
     this.collideWith = function (otherObject) {

@@ -11,12 +11,12 @@ function Ninja(x, y, width, height, images) {
     this.type = "ninja";
     
     this.currentFrame = 0;
-    this.framesPerSprite = 20;
+    this.framesPerSprite = 15;
     this.currentSprite = 0;
     this.numberOfSprites = images.length;
 
     this.draw = function (context) {
-        context.drawImage(images[currentSprite], this.x, this.y, this.width, this.height);
+        context.drawImage(images[this.currentSprite], this.x, this.y, this.width, this.height);
     }
     
     this.collideWith = function (otherObject) {

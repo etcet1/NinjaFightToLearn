@@ -9,7 +9,7 @@ function Homework(x, y, width, height, speedX, speedY) {
     this.type = "homework";
 
     this.draw = function (context) {
-        this.context.drawImage(imageRepository.Homework, this.x, this.y, this.width, this.height);
+        context.drawImage(imageRepository.homeWork, this.x, this.y, this.width, this.height);
     }
 
     this.collideWith = function (otherObject) {
