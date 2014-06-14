@@ -62,5 +62,8 @@ function Ninja(x, y, width, height, images) {
         if ( this.currentSprite === this.numberOfSprites){
             this.currentSprite = 0;
         }
+
+        this.x = newPosition.x;
+        this.y = newPosition.y;
     };
 }
