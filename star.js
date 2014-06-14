@@ -1,10 +1,10 @@
-function Star(x, y, width, height) {
+function Star(x, y, width, height, speedX, speedY) {
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
-    this.speedX = 0;
-    this.speedY = 0;
+    this.speedX = speedX;
+    this.speedY = speedY;
     this.isAlive = true;
     this.type = "star";
 
@@ -13,7 +13,11 @@ function Star(x, y, width, height) {
     }
 
     this.collideWith = function (otherObject) {
-
+        if (otherObject.type === "homework") {
+            if (isColliding(this, otherObject)) {
+                this.isAlive = false;
+            }
+        }
     }
 
     this.move = function (leftBorderX, topBorderY, rightBorderX, bottomBorderY) {
