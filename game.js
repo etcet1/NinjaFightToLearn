@@ -24,7 +24,6 @@ function Game() {
 	var self = this;
     
     this.init = function () {
-        //TODO: add timers for spawning homeworks
         console.log("game init");
 
         drawStartScreen(Raphael(0, 0, 800, 600));
@@ -43,9 +42,6 @@ function Game() {
                 imageRepository.ninja);
 
             this.homeworks = [];
-            var testHomework = new Homework(500,300,100,100,-5,0);
-            this.homeworks.push (testHomework);
-            
             this.stars = [];
             // var testStar = new Star(100,100,20,20);
             // testStar.speedX = 5;
@@ -64,6 +60,7 @@ function Game() {
         console.log(this);
         this.updateFrame();
         this.drawFrame();
+        this.spawnHomework();
     }
     
     this.updateFrame = function(){
@@ -83,6 +80,14 @@ function Game() {
         }
         
         setTimeout(self.updateFrame, 1000 / 60);
+    }
+
+    this.spawnHomework = function () {
+        var homeworkY = Math.floor((Math.random() * 500) + 1),
+            homework = new Homework(800, homeworkY, 80, 100, -5, 0);
+
+        self.homeworks.push(homework);
+        setTimeout(self.spawnHomework, 1000);
     }
     
     this.moveObjects = function (){

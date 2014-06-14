@@ -30,21 +30,21 @@ function drawStartScreen(paper) {
     setTimeout(function () {
         //draw main screen buttons
         drawScreenButton("Start", "absolute", 280, 230, "startButton");
-        drawScreenButton("Help", "absolute", 280, 470, "aboutButton");
+        drawScreenButton("Help", "absolute", 280, 470, "helpButton");
 
         $(document).on('click', '#startButton', function () {
             clearStartScreen();
             game.start();
         });
 
-        $(document).on('click', '#aboutButton', function () {
+        $(document).on('click', '#helpButton', function () {
             clearStartScreen();
-            drawAboutScreen(Raphael(0, 0, 800, 600));
+            drawHelpScreen(Raphael(0, 0, 800, 600));
         });
     }, 1200);
 }
 
-function drawAboutScreen(paper) {
+function drawHelpScreen(paper) {
     var paperWidth = paper.width,
         paperHeight = paper.height;
 
