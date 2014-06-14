@@ -1,17 +1,22 @@
+
+//'use strict';
 var controls = new function () {
 
     // Define currently pressed key controls
 
+    //asigning variable to the instance of the object
+    var self = this;
+
     //pressed keys array
-    this.pressedKeys = {};
+    self.pressedKeys = {};
 
     //mouse events
-    this.cursorX = 0;
-    this.cursorY = 0;
-    this.leftButtonClick = false;
+    self.cursorX = 0;
+    self.cursorY = 0;
+    self.leftButtonClick = false;
 
 
-    this.keyPress = function (e) {
+    self.keyPress = function (e) {
 
         var key;
 
@@ -24,16 +29,13 @@ var controls = new function () {
 
         //directions
         if (key === 37 || key === 38 || key === 39 || key === 40) {
-            this.pressedKeys[key] = true;
+            self.pressedKeys[key] = true;
         }
+
+        //console.log(self.pressedKeys);
     };
 
-    this.mouseMove = function (e) {
-        this.cursorX = e.pageX;
-        this.cursorY = e.pageY;
-    };
-
-    this.mouseClick = function (e) {
+    self.mouseClick = function (e) {
         var buttonClicked;
 
         //IE
@@ -44,8 +46,24 @@ var controls = new function () {
         }
 
         if (buttonClicked == 1) {
-            this.leftButtonClick = true;
+            self.leftButtonClick = true;
+            self.cursorX = e.pageX;
+            self.cursorY = e.pageY;
         }
+
+       // console.log(self.cursorX);
+       // console.log(self.cursorY);
+       // console.log(self.leftButtonClick);
     };
 
+//    self.mouseClickEnd = function () {
+//        self.leftButtonClick = false;
+//       // console.log(self.leftButtonClick);
+//    };
+
+    document.addEventListener('keydown', self.keyPress);
+    document.addEventListener('onmousedown', self.mouseClick, false);
+
+//    document.addEventListener('mouseup', self.mouseClickEnd, false);
 }
+
