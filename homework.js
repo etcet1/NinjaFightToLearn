@@ -25,9 +25,9 @@ function Homework(x, y, width, height, speedX, speedY) {
         this.y += this.speedY
 
         if (this.x > rightBorderX ||
-                this.x - this.width < leftBorderX ||
+                this.x + this.width < leftBorderX ||
                 this.y > bottomBorderY ||
-                this.y - this.height < topBorderY) {
+                this.y + this.height < topBorderY) {
             this.isAlive = false;
         }
     };
