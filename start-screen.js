@@ -81,7 +81,7 @@ function drawHelpScreen(paper) {
 
 function drawGameOverScreen(paper) {
 
-    drawText(paper, 400, 250, "Game over. You lost!", 25, "yellow");
+    drawText(paper, 400, 250, "Game over. You lost!", 30, "yellow");
 
     drawScreenButton("Play again", "absolute", 300, 370, "playAgainButton");
 
@@ -109,6 +109,7 @@ function drawScreenButton(text, position, top, left, id) {
     startButton.style.position = position;
     startButton.style.top = top + "px";
     startButton.style.left = left + "px";
+    startButton.style.fontSize = "16px";
     startButton.id = id;
     document.body.appendChild(startButton);
 }
