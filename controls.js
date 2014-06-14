@@ -3,7 +3,7 @@ var controls = new function () {
     // Define currently pressed key controls
 
     //pressed keys array
-    this.pressedKeys = [];
+    this.pressedKeys = {};
 
     //mouse events
     this.cursorX = 0;
@@ -24,9 +24,7 @@ var controls = new function () {
 
         //directions
         if (key === 37 || key === 38 || key === 39 || key === 40) {
-            if (this.pressedKeys.indexOf(key) === -1) {
-                this.pressedKeys.push(key);
-            }
+            this.pressedKeys[key] = true;
         }
     };
 
@@ -49,4 +47,5 @@ var controls = new function () {
             this.leftButtonClick = true;
         }
     };
+
 }
