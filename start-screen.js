@@ -27,27 +27,11 @@ function drawStartScreen(paper) {
         y: eggHeight * 2
     }, 1000);
 
-    function addMenuButtons() {
-        var startButton = document.createElement('button');
-        startButton.innerHTML = "Start";
-        startButton.style.position = "absolute";
-        startButton.style.top = "250px";
-        startButton.id = "startButton";
-        startButton.style.left = "230px";
-        // startButton.onclick = startGame; // change the function
-        document.body.appendChild(startButton);
-
-        var aboutButton = document.createElement('button');
-        aboutButton.innerHTML = "About";
-        aboutButton.style.position = "absolute";
-        aboutButton.style.top = "250px";
-        aboutButton.id = "aboutButton";
-        aboutButton.style.left = "460px";
-        // aboutButton.onclick = aboutGame; // change the function
-        document.body.appendChild(aboutButton);
-    }
-
-    setTimeout(addMenuButtons, 1200);
+    setTimeout(function(){
+        //draw main screen buttons
+        drawScreenButton("Start", "absolute", 250, 230, "startButton");
+        drawScreenButton("About", "absolute", 250, 460, "aboutButton");
+    }, 1200);
 }
 
 function drawAboutScreen(paper) {
@@ -65,6 +49,13 @@ function drawAboutScreen(paper) {
         "font-family": "Calibri, Arial",
         fill: "black"
     });
+
+    drawScreenButton("Back", "absolute", 400, 50, "backButton");
+
+    $(document).on('click', '#backButton', function () {
+        clearStartScreen();
+        drawStartScreen(Raphael(0, 0, 800, 600));
+    });
 }
 
 function clearStartScreen() {
@@ -75,4 +66,14 @@ function clearStartScreen() {
         i--;
     }
     paper.remove();
+}
+
+function drawScreenButton (text, position, top, left, id){
+    var startButton = document.createElement('button');
+    startButton.innerHTML = text;
+    startButton.style.position = position;
+    startButton.style.top = top + "px";
+    startButton.style.left = left + "px";
+    startButton.id = id;
+    document.body.appendChild(startButton);
 }
