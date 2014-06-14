@@ -29,8 +29,8 @@ function drawStartScreen(paper) {
 
     setTimeout(function () {
         //draw main screen buttons
-        drawScreenButton("Start", "absolute", 250, 230, "startButton");
-        drawScreenButton("Help", "absolute", 250, 460, "aboutButton");
+        drawScreenButton("Start", "absolute", 280, 230, "startButton");
+        drawScreenButton("Help", "absolute", 280, 470, "aboutButton");
     }, 1200);
 }
 
@@ -60,6 +60,8 @@ function drawAboutScreen(paper) {
     paper.image("images/star.png", 550, 395, 40, 40);
 
     drawScreenButton("Back", "absolute", 500, 350, "backButton");
+
+    drawText(paper, 400, 580, "Copyright (c) 2014 Telerik Academy Team \"Mavado\"", 15, "black");
 
     $(document).on('click', '#backButton', function () {
         clearStartScreen();
