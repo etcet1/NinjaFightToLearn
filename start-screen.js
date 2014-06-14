@@ -1,5 +1,5 @@
 function drawStartScreen(paper) {
-    var paperWidth = paper.width,ieuyer
+    var paperWidth = paper.width,
         paperHeight = paper.height,
         ninjaWidth = 133,
         ninjaHeight = 170,
