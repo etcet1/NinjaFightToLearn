@@ -31,6 +31,19 @@ function drawStartScreen(paper) {
         //draw main screen buttons
         drawScreenButton("Start", "absolute", 280, 230, "startButton");
         drawScreenButton("Help", "absolute", 280, 470, "aboutButton");
+
+        drawScreenButton("Start", "absolute", 250, 230, "startButton");
+        drawScreenButton("Help", "absolute", 250, 460, "aboutButton");
+
+        $(document).on('click', '#startButton', function () {
+            clearStartScreen();
+            self.start();
+        });
+
+        $(document).on('click', '#aboutButton', function () {
+            clearStartScreen();
+            drawAboutScreen(Raphael(0, 0, 800, 600));
+        });
     }, 1200);
 }
 
