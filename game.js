@@ -6,6 +6,7 @@
 var game = new Game();
 
 function init() {
+    console.log("started");
     if (game.init()) {
         game.start();
     }
@@ -24,29 +25,32 @@ function Game() {
      * running on older browsers.
      */
     this.init = function () {
+        console.log("game init");
+		var self = this;
 
         drawStartScreen(Raphael(0, 0, 800, 600));
-            
 
         $(document).on('click', '#startButton', function () {
             clearStartScreen();
+            self.start();
         });
 
         $(document).on('click', '#aboutButton', function () {
             clearStartScreen();
             drawAboutScreen(Raphael(0, 0, 800, 600));
         });
-
+    
 //        Get the canvas element
-        this.bgCanvas = document.getElementById('background');
+        this.canvas = document.getElementById('game-canvas');
+        // console.log(this.canvas);
         // Test to see if canvas is supported
-        if (this.bgCanvas.getContext) {
-            this.bgContext = this.bgCanvas.getContext('2d');
+        if (this.canvas.getContext) {
+            this.context = this.canvas.getContext('2d');
             // Initialize objects to contain their context and canvas
             // information
             Background.prototype.context = this.bgContext;
-            Background.prototype.canvasWidth = this.bgCanvas.width;
-            Background.prototype.canvasHeight = this.bgCanvas.height;
+            Background.prototype.canvasWidth = this.canvas.width;
+            Background.prototype.canvasHeight = this.canvas.height;
             // Initialize the background object
             this.background = new Background();
             this.background.init(0, 0); // Set draw point to 0,0
