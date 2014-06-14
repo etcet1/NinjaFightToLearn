@@ -32,9 +32,6 @@ function drawStartScreen(paper) {
         drawScreenButton("Start", "absolute", 280, 230, "startButton");
         drawScreenButton("Help", "absolute", 280, 470, "aboutButton");
 
-        drawScreenButton("Start", "absolute", 250, 230, "startButton");
-        drawScreenButton("Help", "absolute", 250, 460, "aboutButton");
-
         $(document).on('click', '#startButton', function () {
             clearStartScreen();
             game.start();
