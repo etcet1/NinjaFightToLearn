@@ -1,5 +1,3 @@
-
-//'use strict';
 var controls = new function () {
 
     // Define currently pressed key controls
