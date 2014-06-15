@@ -79,11 +79,12 @@ function drawHelpScreen(paper) {
     });
 }
 
-function drawGameOverScreen(paper) {
-
+function drawGameOverScreen(paper, point) {
+    hidePoints();
     drawText(paper, 400, 250, "Game over. You lost!", 30, "yellow");
+    drawText(paper, 400, 280, "Your points: " + point, 30, "yellow");
 
-    drawScreenButton("Play again", "absolute", 300, 370, "playAgainButton");
+    drawScreenButton("Play again", "absolute", 340, 370, "playAgainButton");
 
     $(document).on('click', '#playAgainButton', function () {
         clearStartScreen();
@@ -101,6 +102,35 @@ function clearStartScreen() {
         i--;
     }
     paper.remove();
+}
+
+function showPoints() {
+    var $pointsDiv = $('<div/>'),
+        $pointsLabel = $('<span/>'),
+        $points = $('<span/>');
+
+    $pointsDiv.attr('id', 'points');
+
+    $pointsLabel.text('Points: ');
+    $pointsLabel.css('position', 'absolute');
+    $pointsLabel.css('top', 300 + 'px');
+    $pointsLabel.css('left', 810 + 'px');
+    $pointsLabel.css('font-size', '16px');
+    $pointsDiv.append($pointsLabel);
+
+    $points.text('0');
+    $points.css('position', 'absolute');
+    $points.css('top', 300 + 'px');
+    $points.css('left', 860 + 'px');
+    $points.css('font-size', '16px');
+    $points.attr('id', 'current-points')
+    $pointsDiv.append($points);
+
+    $('body').append($pointsDiv);
+}
+
+function hidePoints() {
+    $('#points').remove();
 }
 
 function drawScreenButton(text, position, top, left, id) {
