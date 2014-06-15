@@ -28,20 +28,31 @@ function Ninja(x, y, width, height, images) {
     }
 
     this.update = function () {
+        var hasPressedKey = false;
+
         if (controls.pressedKeys[37]) {
             this.speedX = -1;
+            hasPressedKey = true;
         }
 
         if (controls.pressedKeys[38]) {
             this.speedY = -1;
+            hasPressedKey = true;
         }
 
         if (controls.pressedKeys[39]) {
             this.speedX = 1;
+            hasPressedKey = true;
         }
 
         if (controls.pressedKeys[40]) {
             this.speedY = 1;
+            hasPressedKey = true;
+        }
+
+        if (!hasPressedKey) {
+            this.speedX = 0;
+            this.speedY = 0;
         }
     }
 
