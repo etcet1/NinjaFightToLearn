@@ -27,6 +27,24 @@ function Ninja(x, y, width, height, images) {
         }
     }
 
+    this.update = function () {
+        if (controls.pressedKeys[37]) {
+            this.speedX = -1;
+        }
+
+        if (controls.pressedKeys[38]) {
+            this.speedY = -1;
+        }
+
+        if (controls.pressedKeys[39]) {
+            this.speedX = 1;
+        }
+
+        if (controls.pressedKeys[40]) {
+            this.speedY = 1;
+        }
+    }
+
     this.move = function (leftBorderX, topBorderY, rightBorderX, bottomBorderY) {
         // Check if the ninja is moving
         if (this.speedX === 0 && this.speedY === 0){
