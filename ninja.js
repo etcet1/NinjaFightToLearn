@@ -28,29 +28,42 @@ function Ninja(x, y, width, height, images) {
     }
 
     this.update = function () {
-        var hasPressedKey = false;
+        var ninjaSpeed = 2,
+            hasPressedHorizontalArrolKey = false,
+            hasPressedVerticalArrolKey = false;
 
         if (controls.pressedKeys[37]) {
-            this.speedX = -1;
-            hasPressedKey = true;
+            this.speedX = -ninjaSpeed;
+            hasPressedHorizontalArrolKey = true;
         }
 
         if (controls.pressedKeys[38]) {
-            this.speedY = -1;
-            hasPressedKey = true;
+            this.speedY = -ninjaSpeed;
+            hasPressedVerticalArrolKey = true;
         }
 
         if (controls.pressedKeys[39]) {
-            this.speedX = 1;
-            hasPressedKey = true;
+            this.speedX = ninjaSpeed;
+
+            if (hasPressedHorizontalArrolKey) {
+                hasPressedHorizontalArrolKey = false;
+            } else {
+                hasPressedHorizontalArrolKey = true;
+            }
         }
 
         if (controls.pressedKeys[40]) {
-            this.speedY = 1;
-            hasPressedKey = true;
+            this.speedY = ninjaSpeed;
+
+            if (hasPressedVerticalArrolKey)
+            {
+                hasPressedVerticalArrolKey = false;
+            } else {
+                hasPressedVerticalArrolKey = true;
+            }
         }
 
-        if (!hasPressedKey) {
+        if (!(hasPressedHorizontalArrolKey || hasPressedVerticalArrolKey)) {
             this.speedX = 0;
             this.speedY = 0;
         }
