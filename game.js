@@ -1,13 +1,31 @@
+//http://blog.sklambert.com/html5-canvas-game-2d-collision-detection/
+
+/**
+ * Initialize the Game and starts it.
+ */
 var game = new Game();
 
 function init() {
     game.init();
 }
 
+/**
+ * Creates the Game object which will hold all objects and data for
+ * the game.
+ */
 function Game() {
+    /*
+     * Gets canvas information and context and sets up all game
+     * objects.
+     * Returns true if the canvas is supported and false if it
+     * is not. This is to stop the animation script from constantly
+     * running on older browsers.
+     */
 	var self = this;
     
     this.init = function () {
+        console.log("game init");
+
         drawStartScreen(Raphael(0, 0, 800, 600));
         
         this.canvas = document.getElementById('game-canvas');
@@ -35,18 +53,29 @@ function Game() {
     };
 
     this.start = function(){
+        console.log("started");
+        console.log(self);
+        console.log(this);
         this.updateFrame();
         this.drawFrame();
+        // this.spawnHomework();
     }
     
     this.updateFrame = function () {
+        // console.log("update");
+        // console.log(self.ninja);
+        // console.log(self);
+        // console.log(this);
         self.moveObjects();
         self.addNewObjects();
         self.detectCollision();
         self.removeDeadObjects();
 
         if (!self.ninja.isAlive) {
+            // TODO: Show defeat screen
+            // self.context.clearRect(0, 0, self.canvas.width, self.canvas.height);
             drawGameOverScreen(Raphael(0, 0, 800, 600));
+            console.log("lost");
             return;
         }
         
@@ -58,8 +87,17 @@ function Game() {
         }
         ++self.currentFrame;
     }
+
+    // this.spawnHomework = function () {
+        // var homeworkY = Math.floor((Math.random() * 500) + 1),
+            // homework = new Homework(800, homeworkY, 80, 100, -5, 0);
+
+        // self.homeworks.push(homework);
+        // setTimeout(self.spawnHomework, 1000);
+    // }
     
     this.moveObjects = function (){
+        // console.log(this.homeworks);
         this.ninja.update();
         this.ninja.move(
                 0,
@@ -82,6 +120,9 @@ function Game() {
                 this.canvas.width,
                 this.canvas.height);
         }
+        
+        // console.log(this.stars);
+        // console.log(this.homeworks);
     }
     this.frameAtFire = 0;
 
@@ -109,6 +150,8 @@ function Game() {
                 starDirection.x,
                 starDirection.y);
 
+            console.log(newStar);
+
             self.stars.push(newStar);
         }
         
@@ -132,7 +175,9 @@ function Game() {
                 imageRepository.homeWork.width,
                 imageRepository.homeWork.height,
                 direction.x,
-                direction.y);;
+                direction.y);
+                
+            console.log(newHomework);
                 
             self.homeworks.push(newHomework);
         }
@@ -157,6 +202,7 @@ function Game() {
     this.removeDeadObjects = function(){
         // Remove dead homeworks
         for ( var i = 0, len = this.homeworks.length;i < len;++i ){
+            // console.log(i, len);
             if ( !this.homeworks[i].isAlive ) {
                 this.homeworks.splice(i, 1);
                 --i;

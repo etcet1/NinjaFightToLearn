@@ -19,6 +19,7 @@ window.addEventListener("load", function() {
         self.keyPress = function (e) {
             e.preventDefault();
             var key;
+            console.log("keydown");
 
             //IE
             if (window.event) {
@@ -31,6 +32,8 @@ window.addEventListener("load", function() {
             if (key === 37 || key === 38 || key === 39 || key === 40) {
                 self.pressedKeys[key] = true;
             }
+
+            console.log(self.pressedKeys);
         };
 
         self.mouseClick = function (e) {
@@ -48,6 +51,8 @@ window.addEventListener("load", function() {
             if (buttonClicked === buttonCode) {
                 self.leftButtonClick = true;
             }
+
+            // console.log(self.leftButtonClick);
         };
 
         self.keyPressEnd = function (e) {
@@ -69,6 +74,7 @@ window.addEventListener("load", function() {
 
         self.mouseClickEnd = function () {
             self.leftButtonClick = false;
+            //console.log(self.leftButtonClick);
         };
         
         self.mouseMove = function(e) {
@@ -82,6 +88,10 @@ window.addEventListener("load", function() {
                 this.offsetTop -
                 parseInt(currStyle.getPropertyValue("border-top-width")) - 
                 parseInt(currStyle.getPropertyValue("padding-top"));
+            // console.log(parseInt(currStyle.getPropertyValue("border-left-width")));
+            // console.log(parseInt(currStyle.getPropertyValue("border-top-width")));
+            // console.log(self.cursorX);
+            // console.log(self.cursorY);
         }
 
         window.addEventListener('keydown', self.keyPress, false);

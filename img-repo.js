@@ -22,30 +22,37 @@ window.addEventListener("load", function() {
         function imageLoaded() {
             numLoaded++;
             if (numLoaded === numImages) {
+                console.log("window.init");
                 window.init();
             }
         }
 
         this.background.onload = function () {
             imageLoaded();
+            console.log("bg loaded");
         }
         
         this.ninja[0].onload = function () {
             imageLoaded();
+            console.log("ninja1 loaded");
         }
         this.ninja[1].onload = function () {
             imageLoaded();
+            console.log("ninja2 loaded");
         }
         this.ninja[2].onload = function () {
             imageLoaded();
+            console.log("ninja3 loaded");
         }
         
         this.homeWork.onload = function () {
             imageLoaded();
+            console.log("hw loaded");
         }
         
         this.star.onload = function () {
             imageLoaded();
+            console.log("star loaded");
         }
     }
 }, false);
