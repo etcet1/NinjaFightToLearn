@@ -13,11 +13,16 @@ function Star(x, y, width, height, speedX, speedY) {
     }
 
     this.collideWith = function (otherObject) {
+        var hasCollision = false;
+
         if (otherObject.type === "homework") {
             if (isColliding(this, otherObject)) {
                 this.isAlive = false;
+                hasCollision = true;
             }
         }
+
+        return hasCollision;
     }
 
     this.move = function (leftBorderX, topBorderY, rightBorderX, bottomBorderY) {

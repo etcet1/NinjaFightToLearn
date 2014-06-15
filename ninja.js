@@ -14,6 +14,7 @@ function Ninja(x, y, width, height, images) {
     this.framesPerSprite = 15;
     this.currentSprite = 0;
     this.numberOfSprites = images.length;
+    this.points = 0;
 
     this.draw = function (context) {
         context.drawImage(images[this.currentSprite], this.x, this.y, this.width, this.height);
