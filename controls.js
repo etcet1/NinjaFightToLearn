@@ -17,8 +17,9 @@ window.addEventListener("load", function() {
         self.leftButtonClick = false;
 
         self.keyPress = function (e) {
-
+            e.preventDefault();
             var key;
+            console.log("keydown");
 
             //IE
             if (window.event) {
@@ -32,7 +33,7 @@ window.addEventListener("load", function() {
                 self.pressedKeys[key] = true;
             }
 
-            //console.log(self.pressedKeys);
+            console.log(self.pressedKeys);
         };
 
         self.mouseClick = function (e) {
@@ -55,7 +56,7 @@ window.addEventListener("load", function() {
         };
 
         self.keyPressEnd = function (e) {
-
+            e.preventDefault();
             var key;
 
             //IE
@@ -93,10 +94,10 @@ window.addEventListener("load", function() {
             // console.log(self.cursorY);
         }
 
-        gameField.addEventListener('keydown', self.keyPress, false);
+        window.addEventListener('keydown', self.keyPress, false);
         gameField.addEventListener('mousedown', self.mouseClick, false);
 
-        gameField.addEventListener('keyup', self.keyPressEnd);
+        window.addEventListener('keyup', self.keyPressEnd);
         gameField.addEventListener('mouseup', self.mouseClickEnd, false);
         
         gameField.addEventListener('mousemove', self.mouseMove, false);
