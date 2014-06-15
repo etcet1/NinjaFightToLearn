@@ -49,12 +49,8 @@ window.addEventListener("load", function() {
 
             if (buttonClicked === buttonCode) {
                 self.leftButtonClick = true;
-                self.cursorX = e.pageX;
-                self.cursorY = e.pageY;
             }
 
-            // console.log(self.cursorX);
-            // console.log(self.cursorY);
             // console.log(self.leftButtonClick);
         };
 
@@ -79,11 +75,30 @@ window.addEventListener("load", function() {
             self.leftButtonClick = false;
             //console.log(self.leftButtonClick);
         };
+        
+        self.mouseMove = function(e) {
+            var currStyle = window.getComputedStyle(this);
+            
+            self.cursorX = e.pageX -
+                this.offsetLeft - 
+                parseInt(currStyle.getPropertyValue("border-left-width")) - 
+                parseInt(currStyle.getPropertyValue("padding-left"));
+            self.cursorY = e.pageY -
+                this.offsetTop -
+                parseInt(currStyle.getPropertyValue("border-top-width")) - 
+                parseInt(currStyle.getPropertyValue("padding-top"));
+            // console.log(parseInt(currStyle.getPropertyValue("border-left-width")));
+            // console.log(parseInt(currStyle.getPropertyValue("border-top-width")));
+            // console.log(self.cursorX);
+            // console.log(self.cursorY);
+        }
 
         gameField.addEventListener('keydown', self.keyPress, false);
         gameField.addEventListener('mousedown', self.mouseClick, false);
 
         gameField.addEventListener('keyup', self.keyPressEnd);
         gameField.addEventListener('mouseup', self.mouseClickEnd, false);
+        
+        gameField.addEventListener('mousemove', self.mouseMove, false);
     }
 }, false);
