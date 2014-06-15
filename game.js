@@ -98,8 +98,12 @@ function Game() {
     
     this.moveObjects = function (){
         // console.log(this.homeworks);
-        // TODO: dynamically update the ninja after having the controls implemented
-        this.ninja.move();
+        this.ninja.update();
+        this.ninja.move(
+                0,
+                0,
+                this.canvas.width,
+                this.canvas.height);
        
         for ( var i = 0, len = this.homeworks.length;i < len;++i ){
             this.homeworks[i].move(
