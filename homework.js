@@ -13,7 +13,7 @@ function Homework(x, y, width, height, speedX, speedY) {
     }
 
     this.collideWith = function (otherObject) {
-        if (otherObject.type === "ninja" || otherObject.type === "star") {
+        if (otherObject.type === "star") {
             if (isColliding(this, otherObject)) {
                 this.isAlive = false;
             }
