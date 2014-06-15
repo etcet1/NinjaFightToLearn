@@ -122,7 +122,30 @@ function Game() {
     }
     
     this.addNewObjects = function(){
-        // TODO: add a star if player is currently shooting one
+        // Add a star when ninja firing on click
+        if(controls.leftButtonClick){
+            var starSpawnPoint = {
+                    x: this.ninja.x + this.ninja.width /2 ,
+                    y: this.ninja.y + this.ninja.height/2
+                },
+                starTargetPoint = {
+                    x: controls.cursorX,
+                    y: controls.cursorY
+                },
+                starDirection = getVectorWithLength(5, starSpawnPoint, starTargetPoint);
+
+            var newStar = new Star(
+                starSpawnPoint.x,
+                starSpawnPoint.y,
+                imageRepository.star.width,
+                imageRepository.star.height,
+                starDirection.x,
+                starDirection.y);
+
+            console.log(newStar);
+
+            self.stars.push(newStar);
+        }
         
         // Add a homework if it's time
         if ( this.currentFrame % 60 === 0 ){

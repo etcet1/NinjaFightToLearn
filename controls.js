@@ -1,5 +1,5 @@
 window.addEventListener("load", function() {
-    var controls = new function () {
+    window.controls = new function () {
 
         // Define currently pressed key controls
 
