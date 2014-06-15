@@ -189,9 +189,6 @@ function Game() {
         for (var i = 0, homeworksLen = this.homeworks.length; i < homeworksLen; ++i) {
             for (var j = 0, starsLen = this.stars.length; j < starsLen; ++j) {
                 this.homeworks[i].collideWith(this.stars[j]);
-                if (this.stars[j].collideWith(this.homeworks[i])) {
-                    self.ninja.points++;
-                }
             }
         }
 
@@ -210,6 +207,7 @@ function Game() {
                 this.homeworks.splice(i, 1);
                 --i;
                 --len;
+                self.ninja.points++;
             }
         }
 
