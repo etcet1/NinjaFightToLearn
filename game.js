@@ -124,10 +124,14 @@ function Game() {
         // console.log(this.stars);
         // console.log(this.homeworks);
     }
-    
+    this.frameAtFire = 0;
+
     this.addNewObjects = function(){
         // Add a star when ninja firing on click
-        if(controls.leftButtonClick){
+        if(controls.leftButtonClick && this.currentFrame - this.frameAtFire > 30){
+
+            this.frameAtFire = this.currentFrame;
+
             var starSpawnPoint = {
                     x: this.ninja.x + this.ninja.width /2 ,
                     y: this.ninja.y + this.ninja.height/2
