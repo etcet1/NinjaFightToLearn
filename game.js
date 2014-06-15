@@ -189,6 +189,7 @@ function Game() {
         for (var i = 0, homeworksLen = this.homeworks.length; i < homeworksLen; ++i) {
             for (var j = 0, starsLen = this.stars.length; j < starsLen; ++j) {
                 this.homeworks[i].collideWith(this.stars[j]);
+                this.stars[j].collideWith(homeworks[i]);
             }
         }
 
